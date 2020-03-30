@@ -1,0 +1,25 @@
+<wxs module="Date" src="../../third-part/date.wxs"></wxs>
+<i-blank wx:if="{{showBlank}}"></i-blank>
+<view wx:for='{{applys}}' wx:for-index='index' data-index="{{index}}" bindtap="showActionSheet">
+	<i-card title="{{item.job.name}}" thumb="{{item.avatar_url}}" extra="{{item.state}}" full='true'>
+		<view slot="content">
+			<view wx:if='{{item.reason}}'>拒绝理由：{{item.reason}}</view>
+			<view class="caption-wrap">
+				<i-collapse name="岗位简介">
+					<i-collapse-item title="岗位简介" name="岗位简介">
+						<view slot="content"><text space="nbsp">{{item.job.introduction}}</text></view>
+					</i-collapse-item>
+				</i-collapse>
+			</view>
+		</view>
+		<view slot="footer">申请日期：{{Date.toLocaleString(item.apply_time) }}</view>
+	</i-card>
+</view>
+<i-load-more i-class="loadmore" wx:if="{{showLoadmore}}" tip="正在加载更多" loading />
+<!-- 占位用防止被tabbar挡住 -->
+<view style="height:50px"></view>
+<!-- 操作 -->
+<i-action-sheet visible="{{ actionSheetVisible }}" actions="{{ options }}" show-cancel bind:cancel="closeActionSheet" bind:click="do" />
+<i-modal title='填写拒绝理由' visible="{{ modalVisible }}" bind:ok="reject" bind:cancel="closeModal">
+	<i-input wx:if="{{ modalVisible }}" value='{{reason}}' type="textarea" title='理由' placeholder="在此输入拒绝理由" style='text-align:left' maxlength="999" bind:change='inputReason'></i-input>
+</i-modal>

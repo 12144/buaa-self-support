@@ -1,0 +1,4 @@
+/* miniprogram/pages/createJob/createJob.wxss */
+.font-color{
+  color: #495060;
+}

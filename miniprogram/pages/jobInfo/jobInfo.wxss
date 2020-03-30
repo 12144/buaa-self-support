@@ -1,0 +1,83 @@
+/* pages/jobInfo/jobInfo.wxss */
+.i-tags {
+  margin-right: 5px;
+}
+
+.content-row{
+  margin-bottom: 5px;
+}
+
+.drawer {
+  width: 60vw;
+  height: 100vh;
+  background-color: white;
+}
+
+.add_reduce_item {
+  padding-left: 20px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.all-list-item{
+  padding-left: 20px;
+  height:70px;
+}
+
+.all-list-item view{
+  font-size: 0.8em;
+  color: #495060;
+  margin-left: 0.5em;
+}
+
+@keyframes disappear1 {
+  from {}
+
+  to { transform: translateX(-60vw); }
+}
+
+@keyframes disappear2 {
+  from {}
+
+  to {  height: 0; }
+}
+
+.disappear {
+  animation-name:disappear1,disappear2;
+  animation-duration:0.3s,0.3s;
+  animation-delay:0s,0.2s;
+  animation-fill-mode:forwards;
+}
+
+.all-workers-button{
+  position: fixed;
+  right: 0;
+  top:30vh;
+  text-align: center;
+  font-size: 15px;
+  width: 1.5em;
+  background-color: #2d8cf0;
+  color: white;
+  border-radius: 12px 0px 0px 12px;
+  line-height: 1.5em;
+  padding:2px;
+}
+.all-workers-button:hover{
+  filter: brightness(120%);
+}
+.modify-button{
+  position: fixed;
+  right: 0;
+  top:20vh;
+  text-align: center;
+  font-size: 15px;
+  width: 1.5em;
+  background-color: #2d8cf0;
+  color: white;
+  border-radius: 12px 0px 0px 12px;
+  line-height: 1.5em;
+  padding:2px;
+}
+.modify-button:hover{
+  filter: brightness(120%);
+}

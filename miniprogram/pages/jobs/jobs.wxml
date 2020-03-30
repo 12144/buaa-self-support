@@ -1,0 +1,53 @@
+<wxs module="Date" src="../../third-part/date.wxs"></wxs>
+<import src="/template/filter/filter.wxml" />
+<!-- 海报栏 -->
+<image class="post" src="../../images/post2.jpg" mode="aspectFill"></image>
+<!-- 空白提示 -->
+<i-blank wx:if="{{showBlank}}"></i-blank>
+<!-- 筛选器 -->
+<template is="filter"></template>
+<!-- 岗位列表 -->
+<view wx:for='{{jobs}}' wx:for-index='{{index}}' data-job="{{item}}" bindtap="goToJobInfo">
+	<i-card title="{{item.name}}" thumb="{{item.avatar_url}}" full='true'>
+		<!-- 标签提示 -->
+		<view slot="tag">
+			<i-tag wx:if='{{item.temporary}}' class="i-tags" name="临时岗" color='green'>临时岗</i-tag>
+			<i-tag wx:if="{{item.campus == '沙河'}}" class="i-tags" name="沙河" color='yellow'>沙河</i-tag>
+			<i-tag wx:elif="{{item.campus == '学院路'}}" class="i-tags" name="学院路" color='yellow'>学院路</i-tag>
+			<i-tag wx:if="{{item.stop}}" class="i-tags" name="已截止" color="red">已截止</i-tag>
+		</view>
+		<!-- 简介 -->
+		<view class="introduction" slot="content"><text space="nbsp">{{item.introduction}}</text></view>
+		<view slot="footer">报名截止日期：{{Date.toLocaleString(item.end_apply_time) }}</view>
+	</i-card>
+</view>
+<!-- 上拉加载更多 -->
+<i-load-more i-class="loadmore" wx:if="{{showLoadmore}}" tip="正在加载更多" loading />
+<!-- 占位用防止被tabbar挡住 -->
+<view style="height:50px"></view>
+<!-- 筛选 -->
+<i-drawer mode="right" visible="{{showFilter}}" bind:close="closeFilter">
+	<view class="drawer">
+		<!-- 选择校区 -->
+		<i-panel title="校区">
+			<i-radio-group current="{{currentCampus}}" bindchange="changeCampus">
+				<i-radio wx:for="{{campus}}" wx:key="index" value="{{item}}">
+				</i-radio>
+			</i-radio-group>
+		</i-panel>
+		<!-- 选择部门 -->
+		<i-panel i-class="department-picker {{animation}}" title="部门">
+			<picker-view wx:if="{{currentCampus == '沙河'}}" indicator-style="height: 2em;" style="width: 60vw; height: 20vh;" bindchange="changeDepartment">
+				<picker-view-column>
+					<view wx:for="{{shDepartment}}" class="picker-item">{{item.name}}</view>
+				</picker-view-column>
+			</picker-view>
+			<picker-view wx:else indicator-style="height: 2em;" style="width: 60vw; height: 20vh;" bindchange="changeDepartment">
+				<picker-view-column>
+					<view wx:for="{{xylDepartment}}" class="picker-item">{{item.name}}</view>
+				</picker-view-column>
+			</picker-view>
+		</i-panel>
+		<i-button bind:click="filter" type="primary">确认</i-button>
+	</view>
+</i-drawer>

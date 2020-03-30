@@ -1,0 +1,16 @@
+{
+  "usingComponents": {
+    "i-card": "../../dist/card/index",
+    "i-tag": "../../dist/tag/index",
+    "i-load-more": "../../dist/load-more/index",
+    "i-drawer": "../../dist/drawer/index",
+    "i-radio-group": "../../dist/radio-group/index",
+    "i-radio": "../../dist/radio/index",
+    "i-panel": "../../dist/panel/index",
+    "i-button": "../../dist/button/index",
+    "i-blank":"../../dist/blank/index"
+   },
+   "navigationBarTitleText":"岗位列表",
+   "enablePullDownRefresh":true,
+   "onReachBottomDistance":-100
+}

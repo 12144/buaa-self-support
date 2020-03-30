@@ -1,0 +1,25 @@
+<!--pages/studentNotice/studentNotice.wxml-->
+<wxs module="Date" src="../../third-part/date.wxs"></wxs>
+<i-blank wx:if="{{showBlank}}"></i-blank>
+<view wx:for='{{applys}}' wx:for-index='index' data-job="{{item}}" data-index="{{index}}" bindtap="">
+	<i-card title="{{item.job_name}}" thumb="{{item.avatar_url}}" extra="{{item.state}}" full='true'>
+		<view slot="content">
+			<view wx:if='{{item.reason}}'>拒绝理由：{{item.reason}}</view>
+			<view class="caption-wrap">
+				<i-collapse name="工作时间段">
+					<i-collapse-item title="工作时间段" name="工作时间段">
+						<view slot="content">
+							<view wx:for='{{item.work_time}}' wx:for-item='time' wx:for-index='day'>
+								{{day}}：{{time}}
+							</view>
+						</view>
+					</i-collapse-item>
+				</i-collapse>
+			</view>
+		</view>
+		<view slot="footer">申请日期：{{Date.toLocaleString(item.apply_time) }}</view>
+	</i-card>
+</view>
+<i-load-more i-class="loadmore" wx:if="{{showLoadmore}}" tip="正在加载更多" loading />
+<!-- 占位用防止被tabbar挡住 -->
+<view style="height:50px"></view>

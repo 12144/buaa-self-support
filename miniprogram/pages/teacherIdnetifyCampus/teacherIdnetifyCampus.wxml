@@ -1,0 +1,8 @@
+<!--pages/teacherIdnetify/teacherIdentify.wxml-->
+<i-panel title="选择校区">
+	<i-radio-group current="{{currentCampus}}" bindchange="changeCampus">
+		<i-radio wx:for="{{campus}}" position="right" wx:key="{{item._id}}" value="{{item.name}}">
+		</i-radio>
+	</i-radio-group>
+</i-panel>
+<i-button type="primary" shape="circle" size="small" bindtap="nextStep">下一步</i-button>

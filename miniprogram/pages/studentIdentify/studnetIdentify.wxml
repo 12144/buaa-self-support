@@ -1,0 +1,13 @@
+<!--pages/studentIdentify/studnetIdentify.wxml-->
+<i-panel title="身份认证">
+    <i-input value="{{ name }}" title="姓名" placeholder="XXX" bind:change="inputName" maxlength="30"/>
+    <i-input value="{{ student_id }}" title="学号" placeholder="XXXXXXXX" bind:change="inputStudentId" maxlength="30"/>
+</i-panel>
+<i-button type="primary" shape="circle" size="small" bindtap="confirm">确认</i-button>
+
+<i-modal title="提示" visible="{{ visible }}" bind:click="onclick" actions="{{actions}}" style="height:auto">
+    <view style="padding-left:15px;padding-right:15px">
+      未查询到您的信息，点击“取消”检查信息是否正确，或输入手机号并点击“继续”以非经困生身份进入
+       <i-input value="{{mobile_number}}" title="手机号:" bind:change="inputMobileNumber" maxlength='30' style='text-align:left' type="number"/>
+    </view>
+</i-modal>

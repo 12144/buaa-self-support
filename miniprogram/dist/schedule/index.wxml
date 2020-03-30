@@ -1,0 +1,55 @@
+<!--dist/schedule.wxml-->
+<i-tabs current="{{ current }}" bindchange="handleChange">
+    <i-tab wx:for="{{schedule.workDay}}" wx:key="item" key="{{item}}" title="{{item}}"></i-tab>
+</i-tabs>
+
+<checkbox-group bindchange="checkboxChange">
+    <view wx:for="{{schedule.workDay}}" wx:for-item="day" wx:key="day" style="display:{{day == current?'':'none'}}">
+        <i-row i-class="row-class" wx:for="{{schedule.workTime[day]}}" wx:key="time" wx:for-index="time" wx:for-item="workers">
+            <i-col span="8" i-class="col-class">{{time}}</i-col>
+            <i-col wx:if='{{ifcreate}}' span="16" i-class="col-class">
+                <view data-day="{{day}}" data-time="{{time}}" bindtap="delete"><i-icon type="delete" size="25" color="#80848f" /></view>
+            </i-col>
+            <i-col wx:if='{{!ifcreate}}' span="12" i-class="col-class">
+                <view wx:for="{{workers}}" wx:for-item="id" wx:key="id">{{schedule.workers[id].name}}</view>
+                <view class="rest">剩余名额:{{schedule.workerNeed - schedule.workTime[day][time].length}}</view>
+            </i-col>
+            <i-col wx:if='{{identity == "Student"}}' span="4" i-class="col-class">
+                <checkbox value="{{day+'?'+time}}" color="#2d8cf0"></checkbox>
+            </i-col>
+            <i-col wx:if='{{add_delete_button && identity=="Teacher"}}' span='4' i-class="col-class">
+                <view class="add_delete_button_wapper">
+                    <view data-day="{{day}}" data-time="{{time}}" bindtap="addStudent"><i-icon type="add" size="25" color="#80848f" /></view>
+                    <view data-day="{{day}}" data-time="{{time}}" bindtap="reduceStudent"><i-icon type="offline" size="25" color="#80848f" /></view>
+                </view>
+            </i-col>
+        </i-row>
+        <i-row>
+            <!-- 添加时间段按钮 -->
+            <i-col span="12">
+                <i-button wx:if='{{ifcreate}}' type="ghost" size="small" data-day="{{day}}" bind:click="showModal"><i-icon type="add" size="28" color="#80848f" /></i-button>
+            </i-col>
+            <!-- 拷贝时间段按钮 -->
+            <i-col span="12">
+                <i-button wx:if='{{ifcreate}}' type="ghost" size="small" data-day="{{day}}" bind:click="showCopyModal"><text style="color:#80848f;">拷贝</text></i-button>
+            </i-col>
+        </i-row>
+    </view>
+</checkbox-group>
+<!-- 添加时间段 -->
+<i-modal title="添加时间段" visible="{{ visible }}" bind:ok="add" bind:cancel="closeModal">
+    <i-cell2 title='开始时间'>
+		<picker mode="time" start="00:00" end="23:59" bindchange="getStartTime" style="margin-left:10px">{{startTime}}</picker>
+	</i-cell2>
+	<i-cell2 title='截止时间'>
+		<picker mode="time" start="00:00" end="23:59" bindchange="getEndTime" style="margin-left:10px">{{endTime}}</picker>
+	</i-cell2>
+</i-modal>
+<!-- 拷贝时间段 -->
+<i-modal title="选择拷贝对象" visible="{{visible2}}" bind:ok="copyTime" bind:cancel="closeModal">
+    <picker-view indicator-style="height: 2em;" style="height: 100px;" bindchange="changeSourceDay">
+        <picker-view-column>
+            <view wx:for="{{schedule.workDay}}" class="">{{item}}</view>
+        </picker-view-column>
+    </picker-view>
+</i-modal>

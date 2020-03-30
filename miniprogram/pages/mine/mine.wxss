@@ -1,0 +1,19 @@
+/* pages/mine/mine.wxss */
+.header{
+  padding-top: 30px;
+  padding-bottom: 40px;
+  padding-left: 30px;
+  background-color: #2b85e4;
+  display: flex;
+  align-items: center;
+}
+.avatar{
+  width: 80px;
+  height: 80px;
+  border: solid white 3px;
+  border-radius: 50%;
+}
+.nickName{
+  color: white;
+  margin-left: 30px;
+}

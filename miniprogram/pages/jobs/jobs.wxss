@@ -1,0 +1,63 @@
+/* pages/jobs/jobs.wxss */
+@import "/template/filter/filter.wxss";
+.i-tags {
+  margin-right: 5px;
+}
+
+.introduction {
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.post{
+  height: 240rpx;
+  width: 720rpx;
+  margin-left: 15rpx;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  box-shadow: 2px 2px 1px #c9c9c9;
+}
+.drawer{
+  width: 60vw;
+  height: 100vh;
+  background-color: white;
+}
+.picker-item{
+  line-height: 2em;
+  text-align: center;
+}
+.department-picker{
+  visibility: hidden;
+}
+
+@keyframes show {
+  from {  
+    transform: translateX(60vw);
+  }
+  to { 
+    visibility: visible;
+  }
+}
+
+.show {
+  animation-name:show;
+  animation-duration:0.3s;
+  animation-fill-mode:forwards;
+}
+@keyframes hidden {
+  from { 
+     visibility: visible; }
+  to { 
+    transform: translateX(60vw);
+    visibility: visible;
+  }
+}
+
+.hidden {
+  animation-name:hidden;
+  animation-duration:0.3s;
+  animation-fill-mode:forwards;
+}

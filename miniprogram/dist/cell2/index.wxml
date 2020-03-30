@@ -1,0 +1,6 @@
+<!--dist/cell2/cell2.wxml-->
+<view class="i-class i-cell i-input">
+  <view wx:if="{{ title }}" class="i-cell-hd i-input-title">{{ title }}</view>
+  <slot></slot>
+  <view wx:if="{{ label }}" class="i-cell-desc">{{ label }}</view>
+</view>

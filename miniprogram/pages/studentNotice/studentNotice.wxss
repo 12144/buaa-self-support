@@ -1,0 +1,16 @@
+/* pages/studentNotice/studentNotice.wxss */
+/* @keyframes test{
+  from {
+    height:200px; 
+    transform-origin: 0 0;
+  }
+  to {
+    transform-origin: 0 0;
+    transform: scale(1,0);
+    height: 0;
+  }
+}
+.disappear{
+  animation: test 5s;
+  animation-fill-mode: forwards;
+} */

@@ -1,0 +1,21 @@
+/* dist/schedule.wxss */
+.col-class{
+  text-align: center;
+  font-weight: 300;
+}
+.row-class{
+  padding-bottom: 20px;
+  padding-top: 20px;
+  border-bottom:rgb(244, 244, 244) solid 0.5px;
+}
+.rest{
+  color: #80848f;
+  font-size: 12px;
+}
+.add_delete_button_wapper{
+  display: flex;
+  flex-direction: row;
+}
+.add_copy_time_button{
+  color: #80848f;
+}

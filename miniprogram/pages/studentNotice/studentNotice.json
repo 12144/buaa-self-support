@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "i-card": "../../dist/card/index",
+    "i-collapse": "../../dist/collapse/index",
+    "i-collapse-item": "../../dist/collapse-item/index",
+    "i-load-more": "../../dist/load-more/index",
+    "i-blank":"../../dist/blank/index"
+   },
+   "navigationBarTitleText":"我的申请",
+   "enablePullDownRefresh":true,
+   "onReachBottomDistance":-100
+}

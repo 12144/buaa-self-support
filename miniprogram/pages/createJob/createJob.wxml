@@ -1,0 +1,46 @@
+<!--miniprogram/pages/createJob/createJob.wxml-->
+<wxs module="Date" src="../../third-part/date.wxs"></wxs>
+<i-panel title="基础用法">
+	<i-input value="{{ job.name }}" title="岗位名称" placeholder="在此填写岗位名称" maxlength="999" bind:change='inputName'/>
+	<i-cell2 title='所在校区'>
+		<view bindtap="showCampus">{{job.campus}}</view>  
+	</i-cell2>
+	<i-action-sheet visible="{{ visible1 }}" actions="{{ campusList }}" show-cancel bind:cancel="closeCampus" bind:click="changeCampus" />
+	<i-cell2 title='所属部门'>
+		<picker value='{{index}}' range="{{job.campus == '沙河'?shDepartment:(job.campus == '学院路'?xylDepartment:[])}}" range-key="name" bindchange='changeDepartment'>
+			<view>{{job.department}}</view>
+		</picker>
+	</i-cell2>
+	<i-input value="{{ job.teacher }}" title="负责老师" placeholder="在此填写负责老师的名字" maxlength="999" bind:change='inputTeacher'/>
+	<i-input value="{{ job.teacher_mobile_number }}" type="number" title="联系电话" placeholder="在此输入负责老师的手机号" maxlength="999" bind:change='inputTeacherMobile'/>
+	<i-input value="{{ job.email }}" title="联系邮箱" placeholder="在此填写联系邮箱" maxlength="999" bind:change='inputEmail'/>
+	<i-input value="{{ job.department_mobile_number }}" type="number" title="部门电话" placeholder="在此输入部门的电话号" maxlength="999" bind:change='inputDepartmentMobile'/>
+	<i-cell i-class='font-color' title="是否临时岗">
+     <i-switch  slot="footer" value='{{job.temporary}}' bind:change='changeTemporary'>
+		 	<view slot="open">是</view>
+    	<view slot="close">否</view>
+		 </i-switch>
+  </i-cell>
+	<i-input value="{{job.site}}" title="工作地点" placeholder="在此填写工作地点" maxlength="999" bind:change='inputSite'/>
+	<i-input value='{{job.worker_need}}' type='number' title='所需人数' placeholder="0" maxlength="999" bind:change='inputWorkerNeed'></i-input>
+	<i-input value='{{job.introduction}}' type="textarea" title='岗位介绍' placeholder="在此输入岗位介绍" maxlength="999" bind:change='inputIntroduction'></i-input>
+	<i-input value='{{job.note}}' type="textarea" title='报名须知' placeholder="在此输入报名须知" maxlength="999" bind:change='inputNote'></i-input>
+	<i-cell2 title='报名开始日期'>
+		<picker mode="date" start="2020-01-01" end="2050-01-01" bindchange="getStartDay">{{Date.toLocaleDateString(job.start_apply_time)}}</picker>
+		<picker mode="time" start="00:00" end="23:59" bindchange="getStartTime" style="margin-left:10px">{{Date.toLocaleTimeString(job.start_apply_time)}}</picker>
+	</i-cell2>
+	<i-cell2 title='报名截止日期'>
+		<picker mode="date" start="2020-01-01" end="2050-01-01" bindchange="getEndDay">{{Date.toLocaleDateString(job.end_apply_time)}}</picker>
+		<picker mode="time" start="00:00" end="23:59" bindchange="getEndTime" style="margin-left:10px">{{Date.toLocaleTimeString(job.end_apply_time)}}</picker>
+	</i-cell2>
+</i-panel>
+<!-- 时间表 -->
+<i-schedule schedule="{{schedule}}" current="{{current}}" identity='Teacher' ifcreate
+ 	bind:addTime="addTime"
+	bind:copyTime="copyTime" 
+	bind:deleteTime='deleteTime'
+	bind:currentChange="changeCurrent"></i-schedule>
+
+<i-button bind:click="checkInfo" type="primary" size="small" shape="circle" loading="{{loading}}">完成</i-button>
+<!-- 占位用 -->
+<view style="height:5px"></view>

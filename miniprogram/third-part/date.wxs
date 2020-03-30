@@ -1,0 +1,24 @@
+var toLocaleDateString = function(milliseconds){
+  var tmp = getDate(milliseconds)
+  return tmp.toLocaleDateString()
+}
+
+var toLocaleTimeString = function(milliseconds){
+  var tmp = getDate(milliseconds)
+  var hours = tmp.getHours()
+  if(hours < 10) hours = "0" + hours
+  var minutes = tmp.getMinutes()
+  if(minutes < 10) minutes = "0" + minutes
+  return hours + ':' + minutes
+}
+
+var toLocaleString = function(milliseconds){
+  var tmp = getDate(milliseconds)
+  return tmp.toLocaleDateString() + ' ' + tmp.toTimeString().substring(0,5)
+}
+
+module.exports = {
+  toLocaleDateString:toLocaleDateString,
+  toLocaleTimeString:toLocaleTimeString,
+  toLocaleString:toLocaleString
+}

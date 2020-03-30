@@ -1,0 +1,11 @@
+<!--pages/teacherIdentifyDepartment/teacherIdentifyDepartment.wxml-->
+<i-panel title="选择部门">
+  <scroll-view scroll-y style="height:{{height}}px">
+    <i-radio-group current="{{currentDeparment}}" bindchange="changeDepartment">
+      <i-radio wx:for="{{ department }}" position="right" wx:key="{{item.name}}" value="{{item.name}}">
+      </i-radio>
+    </i-radio-group>
+  </scroll-view>
+</i-panel>
+<i-button type="primary" shape="circle" size="small" bindtap="confirm">确认</i-button>
+

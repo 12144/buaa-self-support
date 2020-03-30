@@ -1,0 +1,114 @@
+<!--pages/jobInfo/jobInfo.wxml-->
+<wxs module="Date" src="../../third-part/date.wxs"></wxs>
+<i-card title="{{job.name}}" thumb="{{job.avatar_url}}" full='true'>
+  <!-- 标签 -->
+	<view slot="tag">
+		<i-tag wx:if='{{job.temporary}}' class="i-tags" name="临时岗" color='green'>临时岗</i-tag>
+		<i-tag wx:if="{{job.campus == '沙河'}}" class="i-tags" name="沙河" color='yellow'>沙河</i-tag>
+		<i-tag wx:elif="{{job.campus == '学院路'}}" class="i-tags" name="学院路" color='yellow'>学院路</i-tag>
+	</view>
+	<view slot="content">
+		<!-- 简介 -->
+		<i-row i-class="content-row">
+			<i-col span="6" i-class="col-class">岗位简介</i-col>
+			<i-col span="17" i-class="col-class">
+        <text space="nbsp">{{job.introduction}}</text>
+      </i-col>
+		</i-row>
+		<!-- 须知 -->
+		<i-row i-class="content-row">
+			<i-col span="6" i-class="col-class">报名须知</i-col>
+			<i-col span="17" i-class="col-class">{{job.note}}</i-col>
+		</i-row>
+    <!-- 工作地点 -->
+    <i-row i-class="content-row">
+      <i-col span="6" i-class="col-class">工作地点</i-col>
+      <i-col span="18" i-class="col-class">{{job.site}}</i-col>
+    </i-row>
+    <!-- 负责老师 -->
+    <i-row i-class="content-row">
+      <i-col span="6" i-class="col-class">负责人</i-col>
+      <i-col span="18" i-class="col-class">{{job.teacher}}</i-col>
+    </i-row>
+    <!-- 教师联系电话 -->
+    <i-row i-class="content-row">
+      <i-col span="6" i-class="col-class">负责人电话</i-col>
+      <i-col span="18" i-class="col-class">{{job.teacher_mobile_number}}</i-col>
+    </i-row>
+    <!-- 需要人数 -->
+    <i-row i-class="content-row">
+      <i-col span="6" i-class="col-class">所需人数</i-col>
+      <i-col span="18" i-class="col-class">{{job.worker_need}}</i-col>
+    </i-row>
+    <!-- 单位电话 -->
+    <i-row i-class="content-row">
+      <i-col span="6" i-class="col-class">单位电话</i-col>
+      <i-col span="18" i-class="col-class">{{job.department_mobile_number}}</i-col>
+    </i-row>
+    <!-- 邮箱 -->
+    <i-row i-class="content-row">
+      <i-col span="6" i-class="col-class">邮箱</i-col>
+      <i-col span="18" i-class="col-class">{{job.email}}</i-col>
+    </i-row>
+	</view>
+	<view slot="footer">
+    <view>报名开始日期：{{Date.toLocaleString(job.start_apply_time)}}</view>
+    <view>报名截止日期：{{Date.toLocaleString(job.end_apply_time)}}</view>
+  </view>
+</i-card>
+<!-- 时间表 -->
+<i-schedule schedule="{{schedule}}" current="{{current}}" identity='{{identity}}' add_delete_button
+ bind:checkboxChange="checkboxChange" bind:currentChange="changeCurrent"
+ bind:addStudent="showAddStudent" bind:reduceStudent="showReduceStudent"></i-schedule>
+<!-- 报名按钮 -->
+<i-button wx:if='{{identity == "Student"}}' bind:click="checkApply" type="primary" size="small" shape="circle" loading="{{loading}}" disabled="{{job.stop}}">{{job.stop?"该岗位已停止招募":"报名"}}</i-button>
+<!-- 报名截止按钮 -->
+<i-button wx:if='{{identity == "Teacher" && job._id}}' bind:click="stopApply" type="primary" size="small" shape="circle" disabled="{{notOnCharge ||job.stop}}">{{job.stop?'已截止':'截止报名'}}</i-button>
+<view style="height:5px"></view>
+
+<!-- 添加学生 -->
+<i-drawer mode="left" visible="{{showLeft1}}" bind:close="closeDrawer">
+    <view class='drawer'>
+        <i-panel title="{{add_reduce_student_day + ' ' + add_reduce_student_time}}">
+          <view wx:for='{{schedule.restWorkTime[add_reduce_student_day][add_reduce_student_time]}}' wx:for-item='id'
+           class="add_reduce_item {{add_reduce_student_day+add_reduce_student_time+id==currentId?'disappear':''}}">
+            {{schedule.workers[id].name}}
+            <i-icon type="success_fill" size="25" color="#19be6b" data-id="{{id}}" bindtap="addStudent" />
+          </view>
+        </i-panel>
+    </view>
+</i-drawer>
+<!-- 减少学生 -->
+<i-drawer mode="left" visible="{{showLeft2}}" bind:close="closeDrawer">
+    <view class='drawer'>
+        <i-panel title="{{add_reduce_student_day + ' ' + add_reduce_student_time}}">
+          <view wx:for='{{schedule.workTime[add_reduce_student_day][add_reduce_student_time]}}' wx:for-item='id'
+           class="add_reduce_item {{add_reduce_student_day+add_reduce_student_time+id==currentId?'disappear':''}}">
+            {{schedule.workers[id].name}}
+            <i-icon type="offline_fill" size="25" color="#ed3f14" data-id="{{id}}" bindtap="reduceStudent" />
+          </view>
+        </i-panel>
+    </view>
+</i-drawer>
+<!-- 总名单 -->
+<view wx:if='{{identity && identity != "Student"}}' class="all-workers-button" bindtap="showAllList">总名单</view>
+<i-drawer mode="right" visible="{{showRight}}" bind:close="closeAllList">
+    <view class="drawer">
+        <i-panel title="总名单">
+          <view wx:for='{{schedule.workers}}' wx:for-index='id' wx:for-item='worker' 
+          class="all-list-item {{id==currentId?'disappear':''}}">
+            {{worker.name}}
+            <i-icon type="trash_fill" size="25" color="#ff9900" data-id="{{id}}" bindtap="showFire" />
+            <view>学号：{{worker.student_id}}</view>
+            <view>联系方式：{{worker.mobile_number}}</view>
+          </view>
+        </i-panel>
+    </view>
+</i-drawer>
+
+<!-- 下岗学生弹窗 -->
+<i-modal title="提示" visible="{{ showFire }}" bind:ok="fire" bind:cancel="closeFire">
+    <view>删除后将不能再对该学生进行操作</view>
+</i-modal>
+<!-- 修改 -->
+<view wx:if='{{showModify && identity && identity == "Teacher"}}' class="modify-button" bindtap="modify">修改</view>

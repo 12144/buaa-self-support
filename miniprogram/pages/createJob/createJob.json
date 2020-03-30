@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "i-input": "../../dist/input/index",
+    "i-action-sheet": "../../dist/action-sheet/index",
+    "i-cell-group": "../../dist/cell-group/index",
+    "i-cell": "../../dist/cell/index",
+    "i-cell2":"../../dist/cell2/index",
+    "i-switch": "../../dist/switch/index",
+    "i-schedule": "../../dist/schedule/index",
+    "i-button": "../../dist/button/index"
+  },
+  "navigationBarTitleText":"创建岗位"
+}

@@ -1,0 +1,12 @@
+.blank{
+  margin-top: 30vh;
+  text-align: center;
+}
+.blank image{
+  height: 150px;
+  width: 150px;
+}
+.blank view{
+  font-size: 20px;
+  color: #cedae0;
+}

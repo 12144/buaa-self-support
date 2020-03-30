@@ -1,0 +1,20 @@
+<!--miniprogram/pages/personalInfo/personalInfo.wxml-->
+<i-panel title="个人信息">
+    <i-input value="{{ userInfo.name }}" type="text" title="姓名" placeholder="填写姓名" bind:change="onInputName" maxlength="30" disabled="{{userInfo.className == 'Student'}}"/>
+    <i-input wx:if="{{userInfo.className == 'Student'}}" value="{{ userInfo.student_id }}" type="text" title="学号" placeholder="填写学号" maxlength="30" disabled/>
+    <i-input value="{{ userInfo.mobile_number }}" type="number" title="联系电话" placeholder="填写联系电话" bind:change="onInputMobileNumber" maxlength="30"/>
+    <i-cell2 wx:if="{{userInfo.className == 'Teacher'}}" title='所属部门'>
+        <view bindtap="changeDepartment">{{ userInfo.campus + ' ' + userInfo.department }}</view>
+    </i-cell2>
+    <i-cell2 wx:if="{{userInfo.className == 'Teacher' || userInfo.className == 'Admin'}}" title='密码'><view style="color:#5cadff" bindtap="showModal">点击修改</view></i-cell2>
+</i-panel>
+<i-button bind:click="save" type="primary"  loading="{{loading}}">保存更改</i-button>
+
+<i-modal title="修改密码" visible="{{visible}}" bind:ok="changePassword" bind:cancel="closeModal">
+  <view>
+    <i-input value="{{password1}}" title="密码:" bind:change="inputPassword1"
+    maxlength='100' style='text-align:left' type="password" placeholder='输入密码'/>
+    <i-input value="{{password2}}" title="确认密码:" bind:change="inputPassword2"
+    maxlength='100' style='text-align:left' type="password" placeholder='确认密码'/>
+  </view>
+</i-modal>

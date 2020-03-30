@@ -1,0 +1,22 @@
+<view class="container">
+	<view class="tip">滑动选择身份</view>
+  <!-- 滑动窗口 -->
+	<view class='swiper'>
+		<swiper indicator-dots="true" circular='true' bindchange='changeIdentity'>
+			<block wx:for="{{userIdentity}}" wx:key="index">
+				<swiper-item class="swiper-item">
+					<image src="{{item.imagePath}}"></image>
+					<view>{{item.identity}}</view>
+				</swiper-item>
+			</block>
+		</swiper>
+	</view>
+  <!-- 登录按钮 -->
+	<i-button type="primary" shape="circle" size="small" loading="{{loading}}" open-type='getUserInfo' bindgetuserinfo='login'>登录</i-button>
+</view>
+<!-- 密码弹窗 -->
+<i-modal title="请输入密码" visible="{{visible}}" z bind:ok="teacherOrAdminLogin" bind:cancel="closeModal">
+	<view>
+		<i-input value="{{password}}" title="密码:" bind:change="inputPassword" maxlength='100' style='text-align:left' type="password" />
+	</view>
+</i-modal>

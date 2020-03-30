@@ -1,0 +1,4 @@
+<view class="blank">
+	<image src="../../images/blank.png"></image>
+	<view>空空如也</view>
+</view>

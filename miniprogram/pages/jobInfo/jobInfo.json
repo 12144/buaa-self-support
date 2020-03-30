@@ -1,0 +1,17 @@
+{
+  "usingComponents": {
+    "i-card": "../../dist/card/index",
+    "i-tag": "../../dist/tag/index",
+    "i-row": "../../dist/row/index",
+    "i-col": "../../dist/col/index",
+    "i-schedule": "../../dist/schedule/index",
+    "i-button": "../../dist/button/index",
+    "i-drawer": "../../dist/drawer/index",
+    "i-panel": "../../dist/panel/index",
+    "i-icon": "../../dist/icon/index",
+    "i-collapse": "../../dist/collapse/index",
+    "i-collapse-item": "../../dist/collapse-item/index",
+    "i-modal": "../../dist/modal/index"
+  },
+  "navigationBarTitleText":"岗位详情"
+}

@@ -1,0 +1,58 @@
+<!--pages/teacherNotice/teacherNotice.wxml-->
+<wxs module="Date" src="../../third-part/date.wxs"></wxs>
+<i-tabs current="{{ current }}" bindchange="changeTab" fixed="{{fixed}}">
+	<i-tab wx:for='{{tabs}}' wx:key='item' key="{{item}}" title="{{item}}"></i-tab>
+</i-tabs>
+<i-blank wx:if="{{current == '学生申请' && showBlank1}}"></i-blank>
+<i-blank wx:if="{{current == '我的申请' && showBlank2}}"></i-blank>
+<!-- 我的申请 -->
+<view wx:if='{{current == "我的申请"}}' style="margin-top:{{fixed?'45px':0}}">
+  <view wx:for='{{teacherApplys}}' wx:for-index='index' data-index="{{index}}" bindtap="showActionSheet2">
+    <i-card title="{{item.job.name}}" thumb="{{item.avatar_url}}" extra="{{item.state}}" full='true'>
+			<view slot="content">
+				<view wx:if='{{item.reason}}'>拒绝理由：{{item.reason}}</view>
+				<view class="caption-wrap">
+					<i-collapse name="岗位简介">
+						<i-collapse-item title="岗位简介" name="岗位简介">
+							<view slot="content"><text space="nbsp">{{item.job.introduction}}</text></view>
+						</i-collapse-item>
+					</i-collapse>
+				</view>
+			</view>
+			<view slot="footer">申请日期：{{Date.toLocaleString(item.apply_time) }}</view>
+		</i-card>
+  </view>
+</view>
+<!-- 学生申请 -->
+<view wx:if='{{current == "学生申请"}}' style="margin-top:{{fixed?'45px':0}}">
+	<view wx:for='{{studentApplys}}' wx:key='{{item._id}}' wx:for-index='index' data-index="{{index}}" bindtap="showActionSheet">
+		<i-card title="{{item.job_name}}" thumb="{{item.avatar_url}}" extra="{{item.state}}" full='true'>
+			<view slot="content">
+				<view wx:if='{{item.reason}}'>拒绝理由：{{item.reason}}</view>
+				<view class="caption-wrap">
+					<i-collapse name="工作时间段">
+						<i-collapse-item title="工作时间段" name="工作时间段">
+							<view slot="content">
+								<view wx:for='{{item.work_time}}' wx:for-item='time' wx:for-index='day'>
+                  {{day}}：{{time}}
+                </view>
+							</view>
+						</i-collapse-item>
+					</i-collapse>
+				</view>
+			</view>
+			<view slot="footer">申请日期：{{Date.toLocaleString(item.apply_time) }}</view>
+		</i-card>
+	</view>
+</view>
+<i-load-more i-class="loadmore" wx:if="{{showLoadmore}}" tip="正在加载更多" loading />
+<!-- 占位用防止被tabbar挡住 -->
+<view style="height:50px"></view>
+<!-- 学生申请操作 -->
+<i-action-sheet visible="{{ actionSheetVisible }}" actions="{{ options }}" show-cancel bind:cancel="closeActionSheet" bind:click="do" />
+<i-modal title='填写拒绝理由' visible="{{ modalVisible }}" bind:ok="reject" bind:cancel="closeModal">
+	<i-input wx:if="{{ modalVisible }}" value='{{reason}}' type="textarea" title='理由' placeholder="在此输入拒绝理由"
+	style='text-align:left' maxlength="999" bind:change='inputReason'></i-input>
+</i-modal>
+<!-- 我的申请操作 -->
+<i-action-sheet visible="{{ actionSheetVisible2 }}" actions="{{ options2 }}" show-cancel bind:cancel="closeActionSheet" bind:click="do2" />

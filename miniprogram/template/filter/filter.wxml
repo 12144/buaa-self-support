@@ -1,0 +1,5 @@
+<template name="filter">
+  <view class="filter" bindtap="showFilter">
+    <image src="/images/filter.png"></image>
+  </view>
+</template>

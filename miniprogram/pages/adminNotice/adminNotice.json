@@ -1,0 +1,13 @@
+{
+  "usingComponents": { 
+    "i-card": "../../dist/card/index",
+    "i-action-sheet": "../../dist/action-sheet/index",
+    "i-modal": "../../dist/modal/index",
+    "i-input": "../../dist/input/index",
+    "i-load-more": "../../dist/load-more/index",
+    "i-blank":"../../dist/blank/index"
+  },
+  "navigationBarTitleText":"岗位申请",
+  "enablePullDownRefresh":true,
+  "onReachBottomDistance":-100
+}

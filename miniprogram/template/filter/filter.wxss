@@ -1,0 +1,13 @@
+.filter{
+  position:fixed;
+  right:10px;
+  top:25vh;
+  z-index:3;
+}
+.filter image{
+  width:40px;
+  height:40px;
+}
+.filter:hover{
+  transform: scale(1.1);
+}

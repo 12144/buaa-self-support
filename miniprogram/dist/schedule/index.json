@@ -1,0 +1,13 @@
+{
+  "component": true,
+  "usingComponents": {
+    "i-row": "../../dist/row/index",
+    "i-col": "../../dist/col/index",
+    "i-tabs": "../../dist/tabs/index",
+    "i-tab": "../../dist/tab/index",
+    "i-icon": "../../dist/icon/index",
+    "i-button": "../../dist/button/index",
+    "i-modal": "../../dist/modal/index",
+    "i-cell2":"../../dist/cell2/index"
+  }
+}
