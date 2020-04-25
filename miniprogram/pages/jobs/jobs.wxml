@@ -1,20 +1,23 @@
 <wxs module="Date" src="../../third-part/date.wxs"></wxs>
 <import src="/template/filter/filter.wxml" />
 <!-- 海报栏 -->
-<image class="post" src="../../images/post2.jpg" mode="aspectFill"></image>
+<view class="background">
+	<image src="/images/backgroundtext.png"></image>
+</view>
 <!-- 空白提示 -->
 <i-blank wx:if="{{showBlank}}"></i-blank>
 <!-- 筛选器 -->
 <template is="filter"></template>
+<view style="height:25vh"></view>
 <!-- 岗位列表 -->
-<view wx:for='{{jobs}}' wx:for-index='{{index}}' data-job="{{item}}" bindtap="goToJobInfo">
-	<i-card title="{{item.name}}" thumb="{{item.avatar_url}}" full='true'>
+<view class="job-view" wx:for='{{jobs}}' wx:for-index='{{index}}' data-job="{{item}}" bindtap="goToJobInfo">
+	<i-card i-class='item-card' wrapper title="{{item.name}}" thumb="{{item.avatar_url}}" full='true'>
 		<!-- 标签提示 -->
 		<view slot="tag">
 			<i-tag wx:if='{{item.temporary}}' class="i-tags" name="临时岗" color='green'>临时岗</i-tag>
 			<i-tag wx:if="{{item.campus == '沙河'}}" class="i-tags" name="沙河" color='yellow'>沙河</i-tag>
 			<i-tag wx:elif="{{item.campus == '学院路'}}" class="i-tags" name="学院路" color='yellow'>学院路</i-tag>
-			<i-tag wx:if="{{item.stop}}" class="i-tags" name="已截止" color="red">已截止</i-tag>
+			<i-tag wx:if="{{item.stop}}" class="i-tags" name="已停止" color="red">已停止</i-tag>
 		</view>
 		<!-- 简介 -->
 		<view class="introduction" slot="content"><text space="nbsp">{{item.introduction}}</text></view>

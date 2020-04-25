@@ -4,29 +4,30 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-} 
+}
 
 button {
   background: initial;
 }
 
-button:focus{
+button:focus {
   outline: 0;
 }
 
-button::after{
+button::after {
   border: none;
 }
 
-@keyframes showLoadmore{
-  from{
-    transform: scale(0,0);
+@keyframes showLoadmore {
+  from {
+    transform: scale(0, 0);
   }
-  to{
-    transform: scale(1,1);
+
+  to {
+    transform: scale(1, 1);
   }
 }
 
-.loadmore{
+.loadmore {
   animation: showLoadmore 0.5s;
 }

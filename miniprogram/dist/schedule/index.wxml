@@ -1,4 +1,5 @@
 <!--dist/schedule.wxml-->
+<wxs module="Timesg" src="../../third-part/timeSegement.wxs"></wxs>
 <i-tabs current="{{ current }}" bindchange="handleChange">
     <i-tab wx:for="{{schedule.workDay}}" wx:key="item" key="{{item}}" title="{{item}}"></i-tab>
 </i-tabs>
@@ -6,7 +7,10 @@
 <checkbox-group bindchange="checkboxChange">
     <view wx:for="{{schedule.workDay}}" wx:for-item="day" wx:key="day" style="display:{{day == current?'':'none'}}">
         <i-row i-class="row-class" wx:for="{{schedule.workTime[day]}}" wx:key="time" wx:for-index="time" wx:for-item="workers">
-            <i-col span="8" i-class="col-class">{{time}}</i-col>
+            <i-col span="8" i-class="col-time">
+                <span class='timesg'><span class='timesg-tag1'>始</span>{{Timesg.getStartTime(time)}}</span>
+                <span class='timesg'><span class='timesg-tag2'>终</span>{{Timesg.getEndTime(time)}}</span>
+            </i-col>
             <i-col wx:if='{{ifcreate}}' span="16" i-class="col-class">
                 <view data-day="{{day}}" data-time="{{time}}" bindtap="delete"><i-icon type="delete" size="25" color="#80848f" /></view>
             </i-col>

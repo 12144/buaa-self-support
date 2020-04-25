@@ -35,14 +35,16 @@
   margin-right: auto;
   overflow: hidden;
   background-size: cover;
-  vertical-align: middle
+  vertical-align: middle;
+  border-radius: 8px;
 }
 
 .i-card-header-title {
   margin-left: 5px;
   display: inline-block;
   vertical-align: middle;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 300;
   color: #1c2438
 }
 
@@ -56,7 +58,8 @@
   position: relative;
   padding: 6px 16px;
   color: #495060;
-  font-size: 14px
+  font-size: 16px;
+  font-weight: 300;
 }
 
 .i-card-body::before {
@@ -79,4 +82,8 @@
   padding: 6px 16px;
   color: #80848f;
   font-size: 12px
+}
+.wrapper{
+  border-radius: 10px;
+  box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.097);
 }

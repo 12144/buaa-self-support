@@ -3,8 +3,15 @@
     <image class="avatar" src="{{userInfo.avatarUrl}}" ></image>
     <span class="nickName">{{userInfo.nickName}}</span>
 </view>
-<i-cell-group>
+
+<color-cell wx:if='{{userInfo.className == "Teacher"}}' url="/images/create.png" content="创建岗位"
+ islink linkurl='/pages/createJob/createJob?job="{}"&applyId=""'></color-cell>
+<color-cell url="/images/person.png" content="个人信息" islink linkurl="/pages/personalInfo/personalInfo"></color-cell>
+<color-cell url="/images/logout.png" content="退出登录" islink linktype='relaunch' linkurl="/pages/login/login"></color-cell>
+
+<!-- <i-cell-group>
     <i-cell wx:if='{{userInfo.className == "Teacher"}}' title="创建新的岗位" is-link url='/pages/createJob/createJob?job="{}"&applyId=""'></i-cell>
     <i-cell title="个人信息" is-link url="/pages/personalInfo/personalInfo"></i-cell>
-    <i-cell title="退出登录" is-link url="/pages/login/login" link-type='reLaunch'></i-cell>
-</i-cell-group>
+</i-cell-group> -->
+
+

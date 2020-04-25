@@ -1,0 +1,7 @@
+<view class="color-cell" hover-class="color-cell-hover" bindtap="goto">
+  <image class="icon" src="{{url}}"></image>
+  <view>
+    {{content}}
+    <image class="arrow" src="arrow.png"></image>
+  </view>
+</view>

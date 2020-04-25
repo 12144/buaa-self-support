@@ -5,7 +5,8 @@
     "i-modal": "../../dist/modal/index",
     "i-input": "../../dist/input/index",
     "i-load-more": "../../dist/load-more/index",
-    "i-blank":"../../dist/blank/index"
+    "i-blank":"../../dist/blank/index",
+    "notice":"../../dist/notice/index"
   },
   "navigationBarTitleText":"岗位申请",
   "enablePullDownRefresh":true,

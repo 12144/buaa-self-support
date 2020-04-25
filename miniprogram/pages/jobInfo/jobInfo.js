@@ -200,7 +200,9 @@ Page({
       let time = timeSelected[i].split('?')[1]
       if(!work_time[day])
         work_time[day] = []
-      work_time[day].push(time)
+      let j = 0;
+      while(j < work_time[day].length && work_time[day] < time ) j++;
+      work_time[day].splice(j,0,time)
     }
     return work_time
   },

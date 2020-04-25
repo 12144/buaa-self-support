@@ -2,7 +2,8 @@
   "usingComponents": {
     "i-button":"../../dist/button/index",
     "i-modal": "../../dist/modal/index",
-    "i-input": "../../dist/input/index"
+    "i-input": "../../dist/input/index",
+    "Swiper": "../../dist/theswiper/index"
   },
   "navigationBarTitleText":"登录"
 }

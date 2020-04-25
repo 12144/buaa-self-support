@@ -1,5 +1,9 @@
 import {Student,Teacher,Admin,userInfoInit} from '../../class/entity/UserIdentity.js'
 import {UserInfoDao} from '../../class/dao/UserInfoDao.js'
+import {JobDao} from '../../class/dao/JobDao.js'
+import {OnJobDao} from '../../class/dao/OnJobDao.js'
+import {StudentApplyDao} from '../../class/dao/StudentApplyDao.js'
+import {TeacherApplyDao} from '../../class/dao/TeacherApplyDao.js'
 var Md5 = require('../../third-part/md5.js')
 
 const app = getApp()
@@ -7,17 +11,12 @@ const userInfoDao = new UserInfoDao()
 
 Page({
   data: {
+    imgUrls: [
+      "/images/student.jpg",
+      "/images/teacher.jpg",
+      "/images/admin.jpg",
+    ],
     current: 0,               //当前身份，0学生，1教师，2管理员
-    userIdentity:[{
-        imagePath:"/images/student.png",
-        identity:"学生"
-      },{
-        imagePath:"/images/teacher.png",
-        identity:"教师"
-      },{
-        imagePath:"/images/admin.png",
-        identity:"管理员"
-    }],
     loading:false,
     visible:false,
     password:""
@@ -25,7 +24,9 @@ Page({
 
   //改变身份
   changeIdentity(e){
+    console.log('hello',e);
     this.setData({current:e.detail.current})
+    console.log(this.data.current)
   },
 
   openModal(){
@@ -104,8 +105,14 @@ Page({
       self.getOpenId().then(openid=>{
         //用openid去查询用户
         userInfoDao.getByCondition({'_openid':openid}).then(res=>{
-          if(res.length)
+          if(res.length){
+            //如果头像更新了，执行更新操作
+            if(res[0].avatarUrl != userBasicInfo.avatarUrl){
+              res[0].avatarUrl = userBasicInfo.avatarUrl  
+              self.updateAvatar(openid,userBasicInfo.avatarUrl,res[0])
+            }
             resolve(res[0])
+          }
           //用户不存在初始化用户信息，插入数据库  
           else{  
             var initUserInfo = userInfoInit()
@@ -135,5 +142,21 @@ Page({
         fail: err => {  reject('[云函数] [login] 调用失败', err) }
       })
     })
+  },
+  //更新头像信息
+  updateAvatar(openid,newAvatar,userInfo){
+    var condition = {_openid:openid}
+    var data = {avatarUrl:newAvatar}
+    //更新users表
+    userInfoDao.updates(condition,data);
+    data = {avatar_url:newAvatar}
+    //学生身份，更新student_apply表
+    if(userInfo.student_id)
+      new StudentApplyDao().updates(condition,data)
+    //教师身份，更新teacher_apply和jobs表
+    if(userInfo.campus && userInfo.department){
+      new TeacherApplyDao().updates(condition,data)
+      new JobDao().updates(condition,data)
+    }  
   }
 })

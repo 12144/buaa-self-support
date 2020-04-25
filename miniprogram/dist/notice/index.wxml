@@ -1,0 +1,13 @@
+<view class="notice-container">
+  <view class="notice-head">
+    <image wx:if="{{thumb}}" src="{{thumb}}"></image>
+    <view>{{title}}</view>
+  </view>
+  <view wx:if="{{state == '拒绝'}}" class="notice-reason">
+    拒绝理由：
+    <text>{{reason}}</text>
+  </view>
+  <view class="notice-content"><slot name="content"></slot></view>
+  <view class="notice-footer"><slot name="footer"></slot></view>
+  <cover-image wx:if="{{url}}" class="notice-state" src="{{url}}"></cover-image>
+</view>

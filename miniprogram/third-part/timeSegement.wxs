@@ -1,0 +1,10 @@
+var getStartTime = function(timeStr){
+  return timeStr.substring(0,5)
+}
+var getEndTime = function(timeStr){
+  return timeStr.substring(6)
+}
+module.exports = {
+  getStartTime:getStartTime,
+  getEndTime:getEndTime
+}

@@ -1,16 +1,14 @@
 /* pages/studentNotice/studentNotice.wxss */
-/* @keyframes test{
-  from {
-    height:200px; 
-    transform-origin: 0 0;
-  }
-  to {
-    transform-origin: 0 0;
-    transform: scale(1,0);
-    height: 0;
-  }
+.content{
+  width: 680rpx;
+  margin-top: 20rpx;
+  padding: 10rpx;
+  border-top: dashed #e2e2e2 1px;
+  font-weight: 300;
 }
-.disappear{
-  animation: test 5s;
-  animation-fill-mode: forwards;
-} */
+.content text{
+  display: block;
+  /* border:solid 1px; */
+  max-width: 630rpx;
+  margin-left: 1em;
+}

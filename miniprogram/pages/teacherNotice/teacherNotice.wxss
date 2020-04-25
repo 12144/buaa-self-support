@@ -1,1 +1,14 @@
 /* pages/teacherNotice/teacherNotice.wxss */
+.content{
+  width: 680rpx;
+  margin-top: 20rpx;
+  padding: 10rpx;
+  border-top: dashed #e2e2e2 1px;
+  font-weight: 300;
+}
+.content text{
+  display: block;
+  /* border:solid 1px; */
+  max-width: 630rpx;
+  margin-left: 1em;
+}

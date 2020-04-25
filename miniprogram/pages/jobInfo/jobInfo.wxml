@@ -6,6 +6,7 @@
 		<i-tag wx:if='{{job.temporary}}' class="i-tags" name="临时岗" color='green'>临时岗</i-tag>
 		<i-tag wx:if="{{job.campus == '沙河'}}" class="i-tags" name="沙河" color='yellow'>沙河</i-tag>
 		<i-tag wx:elif="{{job.campus == '学院路'}}" class="i-tags" name="学院路" color='yellow'>学院路</i-tag>
+    <i-tag wx:if="{{job.stop}}" class="i-tags" name="已停止" color="red">已停止</i-tag>
 	</view>
 	<view slot="content">
 		<!-- 简介 -->
@@ -18,7 +19,9 @@
 		<!-- 须知 -->
 		<i-row i-class="content-row">
 			<i-col span="6" i-class="col-class">报名须知</i-col>
-			<i-col span="17" i-class="col-class">{{job.note}}</i-col>
+			<i-col span="17" i-class="col-class">
+        <text space="nbsp">{{job.note}}</text>
+      </i-col>
 		</i-row>
     <!-- 工作地点 -->
     <i-row i-class="content-row">

@@ -21,6 +21,10 @@ Component({
         extra: {
             type: String,
             value: ''
+        },
+        wrapper:{
+            type:Boolean,
+            value:false
         }
     }
 });

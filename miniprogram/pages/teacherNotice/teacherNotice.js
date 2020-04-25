@@ -99,7 +99,7 @@ Page({
       this.closeActionSheet()      
   },
 
-  gotoJobInfo(_id){
+  gotoJobInfo(){
     var _id = this.data.studentApplys[this.data.studentIndex].job_id
     this.closeActionSheet()
     jobDao.get(_id).then(res=>{
@@ -184,7 +184,7 @@ Page({
     var applys = this.data.teacherApplys
     teacherApplyDao.delete(id).then(res=>{
       console.log(res)
-      applys.splice(this.data.teacherIndex,1)
+      applys.splice(self.data.teacherIndex,1)
       self.restOption('teacherApplys',applys)
       wx.showToast({  title: '删除成功' })
     },err=>{
@@ -199,10 +199,14 @@ Page({
       actionSheetVisible2:false,
       modalVisible:false,
     }
-    if(which == 'studentApplys')
+    if(which == 'studentApplys'){
       data.studentApplys = applys
-    else if(which == 'teacherApplys') 
+      data.showBlank1 = applys.length ? false : true
+    }
+    else if(which == 'teacherApplys') {
       data.teacherApplys = applys 
+      data.showBlank2 = applys.length ? false : true
+    }
 
     this.setData(data)
   },

@@ -1,0 +1,29 @@
+.color-cell{
+  /* width: 100%; */
+  display: flex;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+.color-cell-hover{
+  background-color: #e1e0e0;
+}
+.icon{
+  width: 50rpx;
+  height: 50rpx;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+}
+.color-cell view{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 600rpx;
+  font-size: 35rpx;
+  font-weight: 300;
+  margin-left: 30rpx;
+  border-top: solid #e2e2e2 1px;
+}
+.arrow{
+  width: 40rpx;
+  height: 40rpx;
+}

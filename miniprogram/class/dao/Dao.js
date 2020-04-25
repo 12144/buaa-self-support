@@ -105,6 +105,17 @@ export class Dao{
       })
     })
   }
+  //更新多条记录
+  updates(condition,data){
+    var self = this
+    return new Promise(function(resolve,reject){
+      if(data['_openid']) delete data['_openid']
+      if(data['_id']) delete data['_id']
+      self.collection.where(condition).update({data:data}).then(res=>{
+        resolve(res)
+      },err=>{reject(err)})
+    })
+  }
 
   // 删除一条记录，传入_id
   delete(_id){
